@@ -1,0 +1,298 @@
+{
+  "url": "https://www.evi.gv.at/f/162414w",
+  "user_agent_used": "desktop_chrome",
+  "fetch_info": {
+    "status_code": 200,
+    "content_length": 80395,
+    "response_time": 1.421328
+  },
+  "dom_complexity": {
+    "total_elements": 279,
+    "max_depth": 15,
+    "average_children_per_node": 7.835125448028674,
+    "leaf_nodes": 149,
+    "branch_nodes": 130,
+    "complexity_score": 4185
+  },
+  "css_analysis": {
+    "unique_ids": 6,
+    "unique_classes": 152,
+    "bem_score": 309,
+    "atomic_css_score": 20,
+    "inline_styles": 2,
+    "most_used_style_properties": {
+      "height": 1,
+      "color": 1
+    }
+  },
+  "javascript_analysis": {
+    "total_scripts": 12,
+    "inline_scripts": 1,
+    "external_scripts": 11,
+    "total_js_size": 26572,
+    "minified_scripts": 1,
+    "async_scripts": 0,
+    "defer_scripts": 0,
+    "module_scripts": 0,
+    "nomodule_scripts": 1,
+    "frameworks_detected": [],
+    "libraries_detected": [],
+    "patterns": {
+      "spread_operator": 2
+    },
+    "global_variables": "set()",
+    "event_listeners": {},
+    "ajax_patterns": 0,
+    "promise_usage": 0,
+    "async_await_usage": 0
+  },
+  "performance_metrics": {
+    "critical_render_path": {},
+    "resource_hints": {
+      "preload": [
+        "https://assets.evi.gv.at/assets/20250828.4/_next/static/media/9cf9c6e84ed13b5e-s.p.woff2",
+        "https://assets.evi.gv.at/assets/20250828.4/_next/static/css/257a03293e1949c4.css"
+      ]
+    },
+    "lazy_loading": {
+      "images": 1,
+      "iframes": 0
+    },
+    "resource_priorities": {},
+    "inline_critical_css": false,
+    "font_loading_strategy": [],
+    "image_optimization": {
+      "formats": {
+        "svg": 2,
+        "png": 1
+      },
+      "responsive_images": 0,
+      "srcset_usage": 1
+    },
+    "compression_opportunities": {},
+    "caching_headers": {},
+    "http2_push": false,
+    "service_worker": false,
+    "web_vitals_hints": {
+      "lcp_candidates": 14,
+      "cls_risk_elements": 0,
+      "fid_interactive_elements": 29
+    }
+  },
+  "seo_signals": {
+    "title": {
+      "exists": true,
+      "text": "manfredlang VISUELLE KOMMUNIKATION GMBH 4490 St. Florian bei Linz | Firmenbuch EVI",
+      "length": 82,
+      "words": 12,
+      "optimal": false,
+      "pipe_separated": true,
+      "dash_separated": false,
+      "brand_position": "unknown"
+    },
+    "meta_tags": {
+      "description": {
+        "exists": true,
+        "content": "manfredlang VISUELLE KOMMUNIKATION GMBH (162414w): Firmenbuch-Daten & Veröffentlichungen über manfredlang VISUELLE KOMMUNIKATION GMBH (162414w) in Thannstr. 20 a, 4490 St. Florian bei Linz",
+        "length": 188,
+        "optimal": false,
+        "has_cta": false
+      }
+    },
+    "headings": {
+      "hierarchy": [
+        {
+          "h1": {
+            "count": 1,
+            "texts": [
+              "manfredlang VISUELLE KOMMUNIKATION GMBH (162414w)"
+            ],
+            "avg_length": 49
+          }
+        },
+        {
+          "h2": {
+            "count": 3,
+            "texts": [
+              "Organisationsdaten",
+              "Personen",
+              "Aktuellste Veröffentlichungen"
+            ],
+            "avg_length": 18.333333333333332
+          }
+        }
+      ],
+      "has_single_h1": true
+    },
+    "schema_org": {
+      "json_ld_count": 0,
+      "types": []
+    },
+    "open_graph": {
+      "count": 11,
+      "properties": {
+        "og:title": "manfredlang VISUELLE KOMMUNIKATION GMBH 4490 St. Florian bei Linz | Firmenbuch EVI",
+        "og:description": "manfredlang VISUELLE KOMMUNIKATION GMBH (162414w): Firmenbuch-Daten & Veröffentlichungen über manfre",
+        "og:url": "https://www.evi.gv.at/f/162414w",
+        "og:type": "article",
+        "og:locale": "de_AT",
+        "og:image": "https://www.evi.gv.at/images/flagge_og_klein_srgb.jpg",
+        "og:image:secure_url": "https://www.evi.gv.at/images/flagge_og_klein_srgb.jpg",
+        "og:image:type": "image/jpeg",
+        "og:image:width": "400",
+        "og:image:height": "400"
+      }
+    },
+    "twitter_cards": {
+      "count": 5,
+      "type": "summary_large_image"
+    },
+    "canonical": {
+      "exists": true,
+      "url": "https://www.evi.gv.at/f/162414w",
+      "self_referencing": true
+    },
+    "robots": {
+      "content": "index",
+      "noindex": false,
+      "nofollow": false,
+      "noarchive": false,
+      "nosnippet": false,
+      "noimageindex": false
+    },
+    "sitemap": {},
+    "structured_data": {},
+    "content_quality": {
+      "word_count": 102,
+      "unique_words": 78,
+      "lexical_diversity": 0.7647058823529411,
+      "avg_word_length": 13.696078431372548,
+      "sentence_count": 24,
+      "avg_sentence_length": 5.083333333333333,
+      "paragraph_count": 0,
+      "list_count": 11,
+      "table_count": 0,
+      "media_count": 3,
+      "content_to_code_ratio": 0.018632767799393005
+    },
+    "keyword_density": {
+      "visuelle": 3,
+      "kommunikation": 3,
+      "manfredlang": 2,
+      "gmbh": 2,
+      "florian": 2,
+      "eingereichtveröffentlicht": 2,
+      "linz": 1,
+      "firmenbuch": 1,
+      "evizum": 1,
+      "inhaltalle": 1
+    },
+    "readability": {}
+  },
+  "accessibility": {
+    "wcag_2_1": {},
+    "aria": {
+      "aria-label": 5,
+      "aria-labelledby": 2,
+      "aria-describedby": 0,
+      "aria-hidden": 4,
+      "aria-live": 0,
+      "aria-atomic": 0,
+      "aria-relevant": 0,
+      "role": 13,
+      "aria-expanded": 1,
+      "aria-controls": 1,
+      "aria-selected": 0,
+      "aria-checked": 0,
+      "aria-disabled": 0
+    },
+    "semantic_html": {
+      "header": 1,
+      "nav": 1,
+      "main": 1,
+      "article": 0,
+      "section": 2,
+      "aside": 0,
+      "footer": 1,
+      "figure": 0,
+      "figcaption": 0,
+      "time": 0,
+      "mark": 0,
+      "details": 3,
+      "summary": 6
+    },
+    "keyboard_nav": {
+      "tabindex_elements": 1,
+      "positive_tabindex": 0,
+      "accesskey_elements": 0
+    },
+    "screen_reader": {},
+    "color_contrast": {},
+    "focus_indicators": {},
+    "alternative_text": {
+      "total_images": 3,
+      "with_alt": 3,
+      "empty_alt": 2,
+      "missing_alt": 0,
+      "decorative": 0
+    },
+    "form_labels": {
+      "forms_count": 1,
+      "inputs_with_labels": 1,
+      "inputs_without_labels": 0
+    },
+    "landmarks": {},
+    "skip_navigation": {
+      "count": 0,
+      "exists": false
+    },
+    "language": {
+      "html_lang": "de",
+      "lang_changes": 1
+    },
+    "multimedia": {
+      "videos": 0,
+      "videos_with_captions": 0,
+      "videos_with_transcripts": 0,
+      "audio_elements": 0
+    }
+  },
+  "security": {
+    "headers_present": {
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "Content-Security-Policy": "frame-ancestors 'none'; object-src 'none'",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "https": {},
+    "cookies": {
+      "present": false
+    },
+    "csp": {
+      "present": true,
+      "directives": 2,
+      "unsafe_inline": false,
+      "unsafe_eval": false,
+      "default_src": false,
+      "script_src": false,
+      "style_src": false,
+      "report_uri": false
+    },
+    "permissions": {},
+    "security_score": 62.5
+  },
+  "meta_statistics": {
+    "total_data_points": 409,
+    "analysis_categories": 8,
+    "processing_time": 3.015634059906006,
+    "timestamp": "2025-09-15 17:08:23"
+  },
+  "cli_metadata": {
+    "analysis_time": 3.0156970024108887,
+    "user_agent_used": "desktop_chrome",
+    "timeout": 30,
+    "ssl_verification": true,
+    "cli_version": "1.0.0"
+  }
+}
