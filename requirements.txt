@@ -1,23 +1,30 @@
-Flask==3.0.0
-requests==2.31.0
-beautifulsoup4==4.12.2
-lxml
-urllib3==2.1.0
-networkx==3.2.1
-plotly==5.18.0
-cssselect==1.2.0
-html5lib==1.1
-pyvis==0.3.2
-validators==0.22.0
-tldextract==5.1.1
-user-agents==2.2.0
+# DOM Analyzer Dependencies
+# Install with: pip install -r requirements.txt
 
-# Testing dependencies
-pytest>=7.0.0
-pytest-cov>=4.0.0
-pytest-html>=3.1.0
-pytest-xdist>=3.0.0
-pytest-timeout>=2.1.0
-responses>=0.23.0
-selenium>=4.15.0
-psutil>=5.9.0
+# Web scraping and parsing
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# URL parsing and domain extraction  
+tldextract>=5.1.0
+
+# Web framework
+Flask>=2.3.0
+
+# Standard library enhancements (usually included with Python)
+# urllib.parse - built-in
+# collections - built-in
+# json - built-in
+# time - built-in
+# statistics - built-in
+# hashlib - built-in
+# base64 - built-in
+# typing - built-in
+# warnings - built-in
+# mimetypes - built-in
+# argparse - built-in
+# sys - built-in
+# os - built-in
+# threading - built-in
+# webbrowser - built-in
+# re - built-in

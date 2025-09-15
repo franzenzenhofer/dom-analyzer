@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Statistician - Ultimate Website Analyzer</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>DOM Analyzer - Ultimate Website Statistics Tool</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +19,7 @@
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 800px;
             margin: 0 auto;
         }
         
@@ -29,18 +27,11 @@
             text-align: center;
             color: white;
             margin-bottom: 30px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073; }
-            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6; }
         }
         
         h1 {
             font-size: 3em;
             margin-bottom: 10px;
-            font-weight: bold;
         }
         
         .subtitle {
@@ -48,43 +39,38 @@
             opacity: 0.9;
         }
         
-        .input-section {
+        .card {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 30px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             margin-bottom: 30px;
         }
         
-        .url-input {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 18px;
-            border: 3px solid #667eea;
-            border-radius: 10px;
-            outline: none;
-            transition: all 0.3s;
+        .input-group {
+            margin-bottom: 20px;
         }
         
-        .url-input:focus {
-            border-color: #764ba2;
-            box-shadow: 0 0 15px rgba(118, 75, 162, 0.3);
+        .url-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            outline: none;
         }
         
         .analyze-btn {
             width: 100%;
             padding: 15px;
-            margin-top: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
         
         .analyze-btn:hover {
@@ -92,17 +78,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
-        .analyze-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
         .loading {
             display: none;
             text-align: center;
             padding: 20px;
             color: #667eea;
-            font-size: 18px;
         }
         
         .loading.active {
@@ -111,176 +91,39 @@
         
         .results {
             display: none;
+            background: #000;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
         }
         
         .results.active {
             display: block;
         }
         
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
-        
-        .stat-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
-        
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #333;
-            margin: 10px 0;
-        }
-        
-        .stat-label {
-            color: #666;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .chart-container {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .chart-title {
-            color: #667eea;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: bold;
-        }
-        
-        .domain-list {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .domain-item {
-            padding: 10px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
-        
-        .domain-item:hover {
-            background: #f8f8f8;
-        }
-        
-        .domain-category {
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .same-origin {
-            background: #4CAF50;
-            color: white;
-        }
-        
-        .subdomain {
-            background: #FF9800;
-            color: white;
-        }
-        
-        .third-party {
-            background: #f44336;
-            color: white;
-        }
-        
-        .graph-frame {
-            width: 100%;
-            height: 600px;
-            border: none;
-            border-radius: 15px;
-            background: white;
-        }
-        
-        .tag-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .tag-item {
-            padding: 8px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .tag-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        
-        .error-message {
+        .error {
+            display: none;
             background: #ff5252;
             color: white;
             padding: 15px;
             border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .nerd-stats {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #00ff00;
-            background: #000;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            overflow-x: auto;
+            margin-top: 10px;
         }
         
         .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #667eea;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
+            margin: 0 auto 10px;
         }
         
         @keyframes spin {
@@ -292,100 +135,49 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🤓 DOM STATISTICIAN 🤓</h1>
-            <div class="subtitle">The Ultimate Nerdy Website Analyzer - 10,000+ Stats!</div>
+            <h1>🔍 DOM Analyzer</h1>
+            <div class="subtitle">Generate 17,000+ Real Website Statistics</div>
         </div>
         
-        <div class="input-section">
-            <input type="url" class="url-input" id="urlInput" placeholder="Enter URL to analyze (e.g., https://www.evi.gv.at/f/162414w)" value="https://www.evi.gv.at/f/162414w">
-            <button class="analyze-btn" id="analyzeBtn" onclick="analyzeURL()">🔍 ANALYZE DOM NOW!</button>
+        <div class="card">
+            <div class="input-group">
+                <input type="url" class="url-input" id="urlInput" 
+                       placeholder="Enter URL to analyze (e.g., https://www.google.com)">
+            </div>
+            <button class="analyze-btn" onclick="analyzeURL()">🚀 Analyze Website</button>
+            
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <div>Performing deep DOM analysis... This is going to be EPIC!</div>
-            </div>
-            <div class="error-message" id="errorMessage"></div>
-        </div>
-        
-        <div class="results" id="results">
-            <!-- Overview Statistics -->
-            <div class="stat-grid" id="overviewStats"></div>
-            
-            <!-- Domain Distribution Chart -->
-            <div class="chart-container">
-                <div class="chart-title">🌐 Domain Distribution</div>
-                <div id="domainChart"></div>
+                <div>Analyzing website... This may take a moment!</div>
             </div>
             
-            <!-- Asset Types Chart -->
-            <div class="chart-container">
-                <div class="chart-title">📊 Asset Types Distribution</div>
-                <div id="assetChart"></div>
-            </div>
+            <div class="error" id="error"></div>
             
-            <!-- Tag Frequency Chart -->
-            <div class="chart-container">
-                <div class="chart-title">🏷️ Top HTML Tags</div>
-                <div id="tagChart"></div>
-            </div>
-            
-            <!-- Heading Structure -->
-            <div class="chart-container">
-                <div class="chart-title">📝 Heading Structure</div>
-                <div id="headingChart"></div>
-            </div>
-            
-            <!-- Performance Metrics -->
-            <div class="chart-container">
-                <div class="chart-title">⚡ Performance Indicators</div>
-                <div id="performanceChart"></div>
-            </div>
-            
-            <!-- Accessibility Score -->
-            <div class="chart-container">
-                <div class="chart-title">♿ Accessibility Indicators</div>
-                <div id="accessibilityChart"></div>
-            </div>
-            
-            <!-- Third Party Domains List -->
-            <div class="domain-list">
-                <h3>🌍 Third-Party Domains</h3>
-                <div id="domainList"></div>
-            </div>
-            
-            <!-- Dependency Graph -->
-            <div class="chart-container">
-                <div class="chart-title">🕸️ Dependency Graph</div>
-                <iframe id="graphFrame" class="graph-frame"></iframe>
-            </div>
-            
-            <!-- Nerd Stats Terminal -->
-            <div class="nerd-stats" id="nerdStats"></div>
+            <div class="results" id="results"></div>
         </div>
     </div>
     
     <script>
         function analyzeURL() {
-            const url = document.getElementById('urlInput').value;
+            const url = document.getElementById('urlInput').value.trim();
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            const error = document.getElementById('error');
+            
             if (!url) {
                 showError('Please enter a URL to analyze!');
                 return;
             }
             
-            const loading = document.getElementById('loading');
-            const results = document.getElementById('results');
-            const errorMsg = document.getElementById('errorMessage');
-            const btn = document.getElementById('analyzeBtn');
-            
+            // Show loading
             loading.classList.add('active');
             results.classList.remove('active');
-            errorMsg.style.display = 'none';
-            btn.disabled = true;
+            error.style.display = 'none';
             
+            // Make request
             fetch('/analyze', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url: url })
             })
             .then(response => response.json())
@@ -393,311 +185,96 @@
                 if (data.error) {
                     showError(data.error);
                 } else {
-                    displayResults(data);
+                    showResults(data);
                 }
             })
-            .catch(error => {
-                showError('Failed to analyze URL: ' + error.message);
+            .catch(err => {
+                showError('Failed to analyze URL: ' + err.message);
             })
             .finally(() => {
                 loading.classList.remove('active');
-                btn.disabled = false;
             });
         }
         
         function showError(message) {
-            const errorMsg = document.getElementById('errorMessage');
-            errorMsg.textContent = message;
-            errorMsg.style.display = 'block';
+            const error = document.getElementById('error');
+            error.textContent = message;
+            error.style.display = 'block';
         }
         
-        function displayResults(data) {
+        function showResults(data) {
             const results = document.getElementById('results');
-            results.classList.add('active');
             
-            // Display overview statistics
-            displayOverviewStats(data.statistics);
-            
-            // Create charts
-            createDomainChart(data.domain_stats);
-            createAssetChart(data.assets);
-            createTagChart(data.statistics.tag_frequency);
-            createHeadingChart(data.statistics.content_analysis.headings);
-            createPerformanceChart(data.statistics.performance_indicators);
-            createAccessibilityChart(data.statistics.accessibility);
-            
-            // Display domain list
-            displayDomainList(data.domain_stats);
-            
-            // Load dependency graph
-            if (data.graph_path) {
-                document.getElementById('graphFrame').src = '/' + data.graph_path;
-            }
-            
-            // Display nerd stats
-            displayNerdStats(data);
-        }
-        
-        function displayOverviewStats(stats) {
-            const container = document.getElementById('overviewStats');
-            container.innerHTML = '';
-            
-            const overviewData = [
-                { label: 'Total HTML Size', value: formatBytes(stats.html_stats.total_size) },
-                { label: 'Total Tags', value: stats.html_stats.total_tags },
-                { label: 'Unique Tags', value: stats.html_stats.unique_tags },
-                { label: 'Word Count', value: stats.text_stats.word_count },
-                { label: 'Images', value: stats.media_stats.images.total },
-                { label: 'Scripts', value: stats.performance_indicators.external_scripts + stats.performance_indicators.inline_scripts },
-                { label: 'Links', value: stats.content_analysis.links.total },
-                { label: 'Forms', value: stats.content_analysis.forms },
-                { label: 'Text/HTML Ratio', value: stats.text_stats.text_to_html_ratio.toFixed(1) + '%' },
-                { label: 'Third-Party Domains', value: stats.domain_distribution.unique_third_party_domains },
-                { label: 'CSS Classes', value: stats.css_complexity.classes_used },
-                { label: 'Accessibility Score', value: Object.values(stats.accessibility).reduce((a,b) => a+b, 0) }
-            ];
-            
-            overviewData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'stat-card';
-                card.innerHTML = `
-                    <div class="stat-label">${item.label}</div>
-                    <div class="stat-value">${item.value}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-        
-        function createDomainChart(domainStats) {
-            const data = [{
-                values: [
-                    domainStats.same_origin.length,
-                    domainStats.subdomain.length,
-                    domainStats.third_party.length
-                ],
-                labels: ['Same Origin', 'Subdomain', 'Third Party'],
-                type: 'pie',
-                marker: {
-                    colors: ['#4CAF50', '#FF9800', '#f44336']
-                }
-            }];
-            
-            const layout = {
-                height: 400,
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)'
-            };
-            
-            Plotly.newPlot('domainChart', data, layout);
-        }
-        
-        function createAssetChart(assets) {
-            const data = [{
-                x: Object.keys(assets),
-                y: Object.values(assets).map(a => Array.isArray(a) ? a.length : 0),
-                type: 'bar',
-                marker: {
-                    color: 'rgb(102, 126, 234)'
-                }
-            }];
-            
-            const layout = {
-                height: 400,
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                xaxis: { title: 'Asset Type' },
-                yaxis: { title: 'Count' }
-            };
-            
-            Plotly.newPlot('assetChart', data, layout);
-        }
-        
-        function createTagChart(tagFreq) {
-            const sorted = Object.entries(tagFreq).sort((a,b) => b[1] - a[1]).slice(0, 15);
-            
-            const data = [{
-                x: sorted.map(t => t[0]),
-                y: sorted.map(t => t[1]),
-                type: 'bar',
-                marker: {
-                    color: sorted.map((_, i) => `hsl(${270 - i * 10}, 70%, 50%)`)
-                }
-            }];
-            
-            const layout = {
-                height: 400,
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                xaxis: { title: 'HTML Tag' },
-                yaxis: { title: 'Frequency' }
-            };
-            
-            Plotly.newPlot('tagChart', data, layout);
-        }
-        
-        function createHeadingChart(headings) {
-            const data = [{
-                x: Object.keys(headings),
-                y: Object.values(headings),
-                type: 'bar',
-                marker: {
-                    color: ['#667eea', '#764ba2', '#8b5cf6', '#a855f7', '#c084fc', '#d8b4fe']
-                }
-            }];
-            
-            const layout = {
-                height: 300,
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                xaxis: { title: 'Heading Level' },
-                yaxis: { title: 'Count' }
-            };
-            
-            Plotly.newPlot('headingChart', data, layout);
-        }
-        
-        function createPerformanceChart(perf) {
-            const data = [{
-                type: 'scatterpolar',
-                r: Object.values(perf),
-                theta: Object.keys(perf),
-                fill: 'toself',
-                marker: { color: '#667eea' }
-            }];
-            
-            const layout = {
-                height: 400,
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                polar: {
-                    radialaxis: {
-                        visible: true,
-                        range: [0, Math.max(...Object.values(perf)) + 5]
-                    }
-                }
-            };
-            
-            Plotly.newPlot('performanceChart', data, layout);
-        }
-        
-        function createAccessibilityChart(access) {
-            const data = [{
-                x: Object.keys(access),
-                y: Object.values(access),
-                type: 'scatter',
-                mode: 'lines+markers',
-                line: { color: '#4CAF50', width: 3 },
-                marker: { size: 10 }
-            }];
-            
-            const layout = {
-                height: 400,
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                xaxis: { title: 'Accessibility Feature' },
-                yaxis: { title: 'Count' }
-            };
-            
-            Plotly.newPlot('accessibilityChart', data, layout);
-        }
-        
-        function displayDomainList(domainStats) {
-            const container = document.getElementById('domainList');
-            container.innerHTML = '';
-            
-            const allDomains = [
-                ...domainStats.same_origin.map(d => ({url: d, category: 'same-origin'})),
-                ...domainStats.subdomain.map(d => ({url: d, category: 'subdomain'})),
-                ...domainStats.third_party.map(d => ({url: d, category: 'third-party'}))
-            ];
-            
-            const uniqueDomains = {};
-            allDomains.forEach(item => {
-                const domain = new URL(item.url).hostname;
-                if (!uniqueDomains[domain]) {
-                    uniqueDomains[domain] = item.category;
-                }
-            });
-            
-            Object.entries(uniqueDomains).forEach(([domain, category]) => {
-                const item = document.createElement('div');
-                item.className = 'domain-item';
-                item.innerHTML = `
-                    <span>${domain}</span>
-                    <span class="domain-category ${category}">${category.replace('-', ' ')}</span>
-                `;
-                container.appendChild(item);
-            });
-        }
-        
-        function displayNerdStats(data) {
-            const stats = data.statistics;
-            const nerdContainer = document.getElementById('nerdStats');
-            
-            const nerdData = `
-===[ ULTRA NERD STATISTICS ]===================================
+            const report = `
+DOM ANALYZER REPORT
+${'='.repeat(60)}
 URL: ${data.url}
-TIMESTAMP: ${new Date().toISOString()}
+Analysis Date: ${data.meta_analysis.analysis_timestamp}
+Processing Time: ${data.meta_analysis.processing_time.toFixed(3)} seconds
 
-[HTML METRICS]
-├─ Total Size: ${stats.html_stats.total_size} bytes
-├─ Total Tags: ${stats.html_stats.total_tags}
-├─ Unique Tags: ${stats.html_stats.unique_tags}
-├─ DOCTYPE: ${stats.html_stats.doctype ? 'YES' : 'NO'}
-├─ Language: ${stats.html_stats.html_lang || 'NOT SET'}
-└─ Charset: ${stats.html_stats.charset || 'NOT SET'}
+COMPREHENSIVE STATISTICS
+${'='.repeat(60)}
+Total Statistics Generated: ${data.meta_analysis.total_statistics_generated.toLocaleString()}
 
-[HEAD ANALYSIS]
-├─ Title: "${stats.head_analysis?.title || 'NO TITLE'}"
-├─ Title Length: ${stats.head_analysis?.title_length || 0} chars
-├─ Meta Tags: ${stats.head_analysis?.meta_tags || 0}
-├─ OG Tags: ${Object.keys(stats.head_analysis?.og_tags || {}).length}
-├─ Twitter Cards: ${Object.keys(stats.head_analysis?.twitter_cards || {}).length}
-└─ Canonical: ${stats.head_analysis?.canonical ? 'SET' : 'NOT SET'}
+DOCUMENT STRUCTURE
+${'-'.repeat(30)}
+Total Elements: ${data.element_analysis.total_elements.toLocaleString()}
+Unique Tag Types: ${data.element_analysis.unique_tags_count}
+Max Nesting Depth: ${data.element_analysis.max_nesting_depth}
+HTML Size: ${formatBytes(data.page_structure.document_info.total_html_size)}
+Text Content: ${formatBytes(data.page_structure.document_info.total_text_content)}
 
-[CONTENT METRICS]
-├─ Word Count: ${stats.text_stats.word_count}
-├─ Avg Word Length: ${stats.text_stats.average_word_length.toFixed(2)} chars
-├─ Text/HTML Ratio: ${stats.text_stats.text_to_html_ratio.toFixed(2)}%
-├─ Paragraphs: ${stats.text_stats.paragraph_count}
-├─ Total Links: ${stats.content_analysis.links.total}
-│  ├─ Internal: ${stats.content_analysis.links.internal}
-│  ├─ External: ${stats.content_analysis.links.external}
-│  └─ NoFollow: ${stats.content_analysis.links.nofollow}
-├─ Forms: ${stats.content_analysis.forms}
-├─ Inputs: ${stats.content_analysis.inputs}
-└─ Tables: ${stats.content_analysis.tables}
+ATTRIBUTES
+${'-'.repeat(30)}
+Total Attributes: ${data.attribute_analysis.total_attributes.toLocaleString()}
+Unique Attribute Types: ${data.attribute_analysis.unique_attributes_count}
+Data Attributes: ${Object.keys(data.attribute_analysis.data_attributes).length}
+ARIA Attributes: ${Object.keys(data.attribute_analysis.aria_attributes).length}
 
-[PERFORMANCE INDICATORS]
-├─ Inline Scripts: ${stats.performance_indicators.inline_scripts}
-├─ External Scripts: ${stats.performance_indicators.external_scripts}
-├─ Async Scripts: ${stats.performance_indicators.async_scripts}
-├─ Defer Scripts: ${stats.performance_indicators.defer_scripts}
-├─ Inline Styles: ${stats.performance_indicators.inline_styles}
-├─ External Styles: ${stats.performance_indicators.external_styles}
-└─ Style Attributes: ${stats.performance_indicators.inline_style_attributes}
+LINKS
+${'-'.repeat(30)}
+Total Links: ${data.link_analysis.summary.total_links}
+Internal: ${data.link_analysis.summary.internal_count}
+External: ${data.link_analysis.summary.external_count}
+Anchor: ${data.link_analysis.summary.anchor_count}
+Email: ${data.link_analysis.summary.email_count}
 
-[DOMAIN DISTRIBUTION]
-├─ Same Origin: ${stats.domain_distribution.same_origin}
-├─ Subdomains: ${stats.domain_distribution.subdomain}
-├─ Third Party: ${stats.domain_distribution.third_party}
-└─ Unique 3rd Party: ${stats.domain_distribution.unique_third_party_domains}
+IMAGES
+${'-'.repeat(30)}
+Total Images: ${data.image_analysis.total_images}
+With Alt Text: ${data.image_analysis.with_alt}
+Lazy Loading: ${data.image_analysis.lazy_loading}
+Responsive: ${data.image_analysis.responsive_images}
 
-[CSS COMPLEXITY]
-├─ Classes Used: ${stats.css_complexity.classes_used}
-├─ IDs Used: ${stats.css_complexity.ids_used}
-└─ Data Attributes: ${stats.css_complexity.data_attributes}
+SCRIPTS
+${'-'.repeat(30)}
+Total Scripts: ${data.script_analysis.total_scripts}
+Inline: ${data.script_analysis.inline_scripts}
+External: ${data.script_analysis.external_scripts}
+Frameworks: ${data.script_analysis.frameworks_detected.join(', ') || 'None detected'}
 
-[STRUCTURED DATA]
-├─ JSON-LD Scripts: ${stats.structured_data.json_ld}
-├─ Microdata Items: ${stats.structured_data.microdata_items}
-├─ Microdata Props: ${stats.structured_data.microdata_props}
-└─ RDFa Properties: ${stats.structured_data.rdfa}
+PAGE CONTENT
+${'-'.repeat(30)}
+Total Words: ${data.page_structure.text_statistics.total_words.toLocaleString()}
+Unique Words: ${data.page_structure.text_statistics.unique_words.toLocaleString()}
+Paragraphs: ${data.page_structure.text_statistics.paragraphs}
+Headings: ${data.page_structure.text_statistics.headings_total}
+Forms: ${data.page_structure.text_statistics.forms}
 
-================================================================
+TOP ELEMENTS
+${'-'.repeat(30)}
+${Object.entries(data.element_analysis.elements_by_tag)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([tag, count]) => `${tag}: ${count}`)
+    .join('\n')}
+
+${'='.repeat(60)}
+Analysis complete! ${data.meta_analysis.total_statistics_generated.toLocaleString()} statistics generated.
             `;
             
-            nerdContainer.textContent = nerdData;
+            results.textContent = report;
+            results.classList.add('active');
         }
         
         function formatBytes(bytes) {
@@ -708,12 +285,12 @@ TIMESTAMP: ${new Date().toISOString()}
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
         
-        // Auto-analyze on page load with default URL
-        window.onload = function() {
-            if (document.getElementById('urlInput').value) {
-                // analyzeURL(); // Uncomment to auto-analyze on load
+        // Enter key support
+        document.getElementById('urlInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                analyzeURL();
             }
-        };
+        });
     </script>
 </body>
 </html>
